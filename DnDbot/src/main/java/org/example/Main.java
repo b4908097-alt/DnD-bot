@@ -49,9 +49,9 @@ if (messageText.startsWith("/d20")) {
             
             // 3. Сравниваем результат броска с числом проверки
             if (roll >= target) {
-                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\n Поздравляю путник, ты прошел проверку:)");
             } else {
-                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\n К сожалению путник, но ты провалил проверку:(");
             }
         } catch (NumberFormatException e) {
             // Если вместо числа ввели текст, например "/d20 abc"
@@ -64,7 +64,7 @@ if (messageText.startsWith("/d20")) {
 }
 
                 if (text.equalsIgnoreCase("/start")) {
-                    answer = "Приветствую путник ⚔️. \nЗдесь ты сможешь испытать свою удачу, а именнонажми: /d20 или напиши 'кубик', чтобы бросить d20! /nУдачи 🍀";
+                    answer = "Приветствую путник ⚔️. \n Здесь ты сможешь испытать свою удачу, а именнонажми: /d20 или напиши 'кубик', чтобы бросить d20! /n Удачи 🍀";
                 } else if (text.equalsIgnoreCase("/d20") || text.equalsIgnoreCase("кубик") || text.equalsIgnoreCase("d20")) {
                     int diceResult = random.nextInt(20) + 1;
 

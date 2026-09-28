@@ -126,7 +126,6 @@ public class Main {
                         rollDice(chatId, 100);
                         break;
                     default:
-                        sendMessage(chatId, "Неизвестная команда. Используй кнопки или напиши, например: /d20 15");
                         break;
                 }
             }

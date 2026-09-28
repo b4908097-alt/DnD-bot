@@ -78,6 +78,35 @@ public class Main {
                     sendMenu(chatId, "Так же сейчас я проведу небольшой инструктаж, специально для тебя, \nТы можешь использовать команды для всех кубиков которые есть в мире D&D, а именно: \nd4, d6, d8, d10, d12, d20 а также d100. \nЯ надеюсь что ты понимаешь эту информацию:) \nС уважением администрация D&D Bot!");
                     return;
                 }
+                String[] parts = originalText.split("\\s+");
+String command = parts[0].toLowerCase();
+if (command.startsWith("/")) {
+    command = command.substring(1); // Убираем слэш
+}
+
+switch (command) {
+    case "d4":
+        rollDiceWithTarget(chatId, 4, parts);
+        break;
+    case "d6":
+        rollDiceWithTarget(chatId, 6, parts);
+        break;
+    case "d8":
+        rollDiceWithTarget(chatId, 8, parts);
+        break;
+    case "d10":
+        rollDiceWithTarget(chatId, 10, parts);
+        break;
+    case "d12":
+        rollDiceWithTarget(chatId, 12, parts);
+        break;
+    case "d20":
+        rollDiceWithTarget(chatId, 20, parts);
+        break;
+    case "d100":
+        rollDiceWithTarget(chatId, 100, parts);
+        break;
+}
 
                 // Обработка броска d20 с опциональной проверкой сложностей (/d20 15 или d20 15)
                 if (messageText.startsWith("/d20") || messageText.startsWith("d20")) {

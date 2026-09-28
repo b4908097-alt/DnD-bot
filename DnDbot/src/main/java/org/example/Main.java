@@ -87,9 +87,9 @@ public class Main {
                         try {
                             int target = Integer.parseInt(parts[1]);
                             if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
                             } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
                             }
                         } catch (NumberFormatException e) {
                             sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");

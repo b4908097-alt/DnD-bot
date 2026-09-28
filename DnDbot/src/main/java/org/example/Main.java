@@ -99,6 +99,28 @@ public class Main {
                     }
                     return;
                 }
+                               
+                
+                if (messageText.startsWith("/d4") || messageText.startsWith("d4")) {
+                    String[] parts = originalText.split("\\s+");
+                    int roll = random.nextInt(4) + 1;
+
+                    if (parts.length > 1) {
+                        try {
+                            int target = Integer.parseInt(parts[1]);
+                            if (roll >= target) {
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+                            } else {
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                            }
+                        } catch (NumberFormatException e) {
+                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
+                        }
+                    } else {
+                        sendMessage(chatId, "🎲 Бросок d4: " + roll);
+                    }
+                    return;
+                }
 
                 // Нормализация прочих команд (/d4 -> d4)
                 if (messageText.startsWith("/")) {

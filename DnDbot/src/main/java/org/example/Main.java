@@ -84,33 +84,9 @@ if (command.startsWith("/")) {
     command = command.substring(1); // Убираем слэш
 }
 
-switch (command) {
-    case "d4":
-        rollDiceWithTarget(chatId, 4, parts);
-        break;
-    case "d6":
-        rollDiceWithTarget(chatId, 6, parts);
-        break;
-    case "d8":
-        rollDiceWithTarget(chatId, 8, parts);
-        break;
-    case "d10":
-        rollDiceWithTarget(chatId, 10, parts);
-        break;
-    case "d12":
-        rollDiceWithTarget(chatId, 12, parts);
-        break;
-    case "d20":
-        rollDiceWithTarget(chatId, 20, parts);
-        break;
-    case "d100":
-        rollDiceWithTarget(chatId, 100, parts);
-        break;
-}
-
                 // Обработка броска d20 с опциональной проверкой сложностей (/d20 15 или d20 15)
                 if (messageText.startsWith("/d20") || messageText.startsWith("d20")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts20 = originalText.split("\\s+");
                     int roll = random.nextInt(20) + 1;
 
                     if (parts.length > 1) {
@@ -132,7 +108,7 @@ switch (command) {
                                
                 
                 if (messageText.startsWith("/d4") || messageText.startsWith("d4")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts4 = originalText.split("\\s+");
                     int roll = random.nextInt(4) + 1;
 
                     if (parts.length > 1) {
@@ -153,7 +129,7 @@ switch (command) {
                 }
 
                 if (messageText.startsWith("/d6") || messageText.startsWith("d6")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts6 = originalText.split("\\s+");
                     int roll = random.nextInt(6) + 1;
 
                     if (parts.length > 1) {
@@ -174,7 +150,7 @@ switch (command) {
                 }
 
                 if (messageText.startsWith("/d8") || messageText.startsWith("d8")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts8 = originalText.split("\\s+");
                     int roll = random.nextInt(8) + 1;
 
                     if (parts.length > 1) {
@@ -196,7 +172,7 @@ switch (command) {
                 
                 
                 if (messageText.startsWith("/d100") || messageText.startsWith("d100")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts100 = originalText.split("\\s+");
                     int roll = random.nextInt(100) + 1;
 
                     if (parts.length > 1) {
@@ -218,7 +194,7 @@ switch (command) {
 
                 
                 if (messageText.startsWith("/d10") || messageText.startsWith("d10")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts10 = originalText.split("\\s+");
                     int roll = random.nextInt(10) + 1;
 
                     if (parts.length > 1) {
@@ -239,7 +215,7 @@ switch (command) {
                 }
 
                 if (messageText.startsWith("/d12") || messageText.startsWith("d12")) {
-                    String[] parts = originalText.split("\\s+");
+                    String[] parts12 = originalText.split("\\s+");
                     int roll = random.nextInt(12) + 1;
 
                     if (parts.length > 1) {

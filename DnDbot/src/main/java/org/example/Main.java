@@ -1,5 +1,5 @@
 package org.example;
-
+import java.net.ServerSocket;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -39,9 +39,9 @@ public class Main {
                     int diceResult = random.nextInt(20) + 1;
 
                     if (diceResult == 20) {
-                        answer = "🎲 Выпало: 20! 🎯 КРИТИЧЕСКИЙ УСПЕХ! (а ты удачлевый)";
+                        answer = "🎲 Выпало: 20! 🎯 КРИТИЧЕСКИЙ УСПЕХ!  (а ты удачлевый)";
                     } else if (diceResult == 1) {
-                        answer = "🎲 Выпало: 1! 💀 КРИТИЧЕСКИЙ ПРОВАЛ! (не повезло не фартануло)";
+                        answer = "🎲 Выпало: 1! 💀 КРИТИЧЕСКИЙ ПРОВАЛ!  (не повезло не фартануло)";
                     } else {
                         answer = "🎲 Выпало: " + diceResult;
                     }
@@ -67,5 +67,20 @@ public class Main {
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
         botsApi.registerBot(new MyBot());
         System.out.println("Бот запущен!");
+
+        // Фиктивный сервер для Render, чтобы он видел открытый порт
+        String port = System.getenv("PORT");
+        if (port == null) {
+            port = "10000";
+        }
+        try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(port))) {
+            System.out.println("Слушаем порт " + port + " для Render...");
+            while (true) {
+                serverSocket.accept();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }

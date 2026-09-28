@@ -1,0 +1,71 @@
+package org.example;
+
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
+import java.util.Random;
+
+public class Main {
+
+    public static class MyBot extends TelegramLongPollingBot {
+
+        private final Random random = new Random();
+
+        @Override
+        public String getBotUsername() {
+            return "DnD bot";
+        }
+
+        @Override
+        public String getBotToken() {
+            // Вставьте сюда ваш актуальный токен от @BotFather без лишних пробелов
+            return "8804849662:AAFzM9065_seVlUTCJC5__PdWF5Yi5iGxNI";
+        }
+
+        @Override
+        public void onUpdateReceived(Update update) {
+            if (update.hasMessage() && update.getMessage().hasText()) {
+                String chatId = update.getMessage().getChatId().toString();
+                String text = update.getMessage().getText();
+
+                String answer = null;
+
+                if (text.equalsIgnoreCase("/start")) {
+                    answer = "Привет! 👋 Я DnD бот.\nНапиши /d20 или 'кубик', чтобы бросить d20!";
+                } else if (text.equalsIgnoreCase("/d20") || text.equalsIgnoreCase("кубик") || text.equalsIgnoreCase("d20")) {
+                    int diceResult = random.nextInt(20) + 1;
+
+                    if (diceResult == 20) {
+                        answer = "🎲 Выпало: 20! 🎯 КРИТИЧЕСКИЙ УСПЕХ! (а ты удачлевый)";
+                    } else if (diceResult == 1) {
+                        answer = "🎲 Выпало: 1! 💀 КРИТИЧЕСКИЙ ПРОВАЛ! (не повезло не фартануло)";
+                    } else {
+                        answer = "🎲 Выпало: " + diceResult;
+                    }
+                }
+
+                // Отправка сообщения происходит ТОЛЬКО при командах /start, /d20 или "кубик"
+                if (answer != null) {
+                    SendMessage message = new SendMessage();
+                    message.setChatId(chatId);
+                    message.setText(answer);
+
+                    try {
+                        execute(message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+        botsApi.registerBot(new MyBot());
+        System.out.println("Бот запущен!");
+    }
+}

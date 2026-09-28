@@ -34,7 +34,7 @@ public class Main {
                 String answer = null;
 
                 if (text.equalsIgnoreCase("/start")) {
-                    answer = "Привет! 👋 Я DnD бот.\nНапиши /d20 или 'кубик', чтобы бросить d20!";
+                    answer = "Приветствую путник. \nЗдесь ты сможешь испытать свою удачу, а именнонажми: /d20 или напиши 'кубик', чтобы бросить d20!";
                 } else if (text.equalsIgnoreCase("/d20") || text.equalsIgnoreCase("кубик") || text.equalsIgnoreCase("d20")) {
                     int diceResult = random.nextInt(20) + 1;
 

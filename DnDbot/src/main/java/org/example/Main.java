@@ -164,7 +164,30 @@ public class Main {
                     }
                     return;
                 }
+                
+                
+                if (messageText.startsWith("/d100") || messageText.startsWith("d100")) {
+                    String[] parts = originalText.split("\\s+");
+                    int roll = random.nextInt(100) + 1;
 
+                    if (parts.length > 1) {
+                        try {
+                            int target = Integer.parseInt(parts[1]);
+                            if (roll >= target) {
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+                            } else {
+                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                            }
+                        } catch (NumberFormatException e) {
+                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
+                        }
+                    } else {
+                        sendMessage(chatId, "🎲 Бросок d100: " + roll);
+                    }
+                    return;
+                }
+
+                
                 if (messageText.startsWith("/d10") || messageText.startsWith("d10")) {
                     String[] parts = originalText.split("\\s+");
                     int roll = random.nextInt(10) + 1;
@@ -203,27 +226,6 @@ public class Main {
                         }
                     } else {
                         sendMessage(chatId, "🎲 Бросок d12: " + roll);
-                    }
-                    return;
-                }
-
-                if (messageText.startsWith("/d100") || messageText.startsWith("d100")) {
-                    String[] parts = originalText.split("\\s+");
-                    int roll = random.nextInt(100) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d100: " + roll);
                     }
                     return;
                 }

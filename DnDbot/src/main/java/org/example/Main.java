@@ -68,19 +68,24 @@ public class Main {
         botsApi.registerBot(new MyBot());
         System.out.println("Бот запущен!");
 
-        // Фиктивный сервер для Render, чтобы он видел открытый порт
-        String port = System.getenv("PORT");
-        if (port == null) {
-            port = "10000";
-        }
-        try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(port))) {
-            System.out.println("Слушаем порт " + port + " для Render...");
-            while (true) {
-                serverSocket.accept();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Настоящий мини-HTTP сервер для Render
+try {
+    String portStr = System.getenv("PORT");
+    int port = (portStr != null) ? Integer.parseInt(portStr) : 10000;
+
+    com.sun.net.httpserver.HttpServer server = com.sun.net.httpserver.HttpServer.create(new java.net.InetSocketAddress(port), 0);
+    server.createContext("/", exchange -> {
+        String response = "Bot is running!";
+        exchange.sendResponseHeaders(200, response.length());
+        java.io.OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    });
+    server.start();
+    System.out.println("HTTP-сервер запущен на порту " + port);
+} catch (Exception e) {
+    e.printStackTrace();
+}
     }
 
 }

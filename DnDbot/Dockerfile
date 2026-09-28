@@ -5,6 +5,6 @@ RUN mvn clean dependency:copy-dependencies package -DskipTests
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/target/app.jar /app/app.jar
+COPY --from=build /app/target/*.jar /app/app.jar
 COPY --from=build /app/target/dependency /app/dependency
 ENTRYPOINT ["java", "-cp", "app.jar:dependency/*", "org.example.Main"]

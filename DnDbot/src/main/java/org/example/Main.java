@@ -33,15 +33,45 @@ public class Main {
 
                 String answer = null;
 
+                // Если текст начинается с "/d20"
+if (messageText.startsWith("/d20")) {
+    // 1. Разбиваем строку по пробелам
+    String[] parts = messageText.split(" ");
+    
+    // Бросаем кубик d20
+    int roll = random.nextInt(20) + 1;
+    
+    // 2. Проверяем, ввёл ли пользователь второе значение (например, 15)
+    if (parts.length > 1) {
+        try {
+            // Преобразуем второй аргумент в число
+            int target = Integer.parseInt(parts[1]);
+            
+            // 3. Сравниваем результат броска с числом проверки
+            if (roll >= target) {
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+            } else {
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+            }
+        } catch (NumberFormatException e) {
+            // Если вместо числа ввели текст, например "/d20 abc"
+            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
+        }
+    } else {
+        // Если пользователь написал просто "/d20" без сложности
+        sendMessage(chatId, "🎲 Бросок d20: " + roll);
+    }
+}
+
                 if (text.equalsIgnoreCase("/start")) {
-                    answer = "Приветствую путник. \nЗдесь ты сможешь испытать свою удачу, а именнонажми: /d20 или напиши 'кубик', чтобы бросить d20!";
+                    answer = "Приветствую путник ⚔️. \nЗдесь ты сможешь испытать свою удачу, а именнонажми: /d20 или напиши 'кубик', чтобы бросить d20! /nУдачи 🍀";
                 } else if (text.equalsIgnoreCase("/d20") || text.equalsIgnoreCase("кубик") || text.equalsIgnoreCase("d20")) {
                     int diceResult = random.nextInt(20) + 1;
 
                     if (diceResult == 20) {
-                        answer = "🎲 Выпало: 20! 🎯 КРИТИЧЕСКИЙ УСПЕХ!  (а ты удачлевый)";
+                        answer = "🎲 Выпало: 20! 🎯 КРИТИЧЕСКИЙ УСПЕХ!  (а ты удачливый)";
                     } else if (diceResult == 1) {
-                        answer = "🎲 Выпало: 1! 💀 КРИТИЧЕСКИЙ ПРОВАЛ!  (не повезло не фартануло)";
+                        answer = "🎲 Выпало: 1! 💀 КРИТИЧЕСКИЙ ПРОВАЛ!  (не повезло не фортануло)";
                     } else {
                         answer = "🎲 Выпало: " + diceResult;
                     }

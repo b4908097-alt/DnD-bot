@@ -128,42 +128,32 @@ public class Main {
                 }
             }
         }
-
-        // Универсальный метод для броска любого кубика (с поддержкой проверки сложности)
+        
         private void handleRoll(long chatId, int faces, String[] parts) {
-            int roll = random.nextInt(faces) + 1;
+    int roll = random.nextInt(faces) + 1;
 
-            if (parts.length > 1) {
-                try {
-                    int target = Integer.parseInt(parts[1]);
-                    if (roll >= target) {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                    } else {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                    }
-                } catch (NumberFormatException e) {
-                    sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
-                }
+    if (parts.length > 1) {
+        try {
+            int target = Integer.parseInt(parts[1]);
+            if (roll >= target) {
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
             } else {
-                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
             }
+        } catch (NumberFormatException e) {
+            sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
         }
-
-                    if (parts.length > 1) {
-                try {
-                    int target = Integer.parseInt(parts[1]);
-                    if (roll >= target) {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " \nПоздравляю путник, ты прошел проверку:)");
-                    } else {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " \nК сожалению путник, но ты провалил проверку:(");
-                    }
-                } catch (NumberFormatException e) {
-                    sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
-                }
-            } else {
-                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
-            }
+    } else {
+        // Обычный бросок кубика
+        if (roll == faces) {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nПоздравляю у тебя критический успех, а ты хорош.");
+        } else if (roll == 1) {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nК большому сожалению тебе выпал критический провал.\nВ следующий раз повезет больше.");
+        } else {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
         }
+    }
+}
 
         // Вспомогательный метод броска
         private void rollDice(long chatId, int faces) {

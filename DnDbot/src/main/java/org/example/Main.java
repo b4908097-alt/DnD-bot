@@ -103,11 +103,11 @@ public void onUpdateReceived(Update update) {
     if (parts.length > 1) {
         try {
             int target = Integer.parseInt(parts[1]);
-            if (roll >= target) {
-                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-            } else {
-                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-            }
+if (roll >= target) {
+    sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+} else {
+    sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+}
         } catch (NumberFormatException e) {
             sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
         }

@@ -97,25 +97,25 @@ public void onUpdateReceived(Update update) {
 
         // 2. Теперь проверяем очищенный текст:
         if (messageText.startsWith("/d20") || messageText.startsWith("d20")) {
-            String[] parts = cleanText.split("\\s+"); // Разбиваем по пробелам очищенную строку
-            int roll = random.nextInt(20) + 1;
+    String[] parts = originalText.split("\\s+");
+    int roll = random.nextInt(20) + 1;
 
-            if (parts.length > 1) {
-                try {
-                    int target = Integer.parseInt(parts[1]);
-                    if (roll >= target) {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                    } else {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " (КС " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                    }
-                } catch (NumberFormatException e) {
-                    sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                }
+    if (parts.length > 1) {
+        try {
+            int target = Integer.parseInt(parts[1]);
+            if (roll >= target) {
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
             } else {
-                sendMessage(chatId, "🎲 Бросок d20: " + roll);
+                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
             }
-            return;
+        } catch (NumberFormatException e) {
+            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
         }
+    } else {
+        sendMessage(chatId, "🎲 Бросок d20: " + roll);
+    }
+    return;
+}
 
         // Дальше твой стандартный switch/case...
     }

@@ -146,7 +146,7 @@ public class Main {
     } else {
         // Обычный бросок кубика
         if (roll == faces) {
-            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Поздравляю у тебя критический успех. А ты хорош.");
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Поздравляю у тебя критический успех. \nА ты хорош.");
         } else if (roll == 1) {
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n😔 К большому сожалению тебе выпал критический провал.\nВ следующий раз повезет больше.");
         } else {

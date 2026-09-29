@@ -146,7 +146,7 @@ public class Main {
     } else {
         // Обычный бросок кубика
         if (roll == faces) {
-            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Поздравляю у тебя критический успех, а ты хорош.");
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Поздравляю у тебя критический успех. А ты хорош.");
         } else if (roll == 1) {
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nК😔 большому сожалению тебе выпал критический провал.\nВ следующий раз повезет больше.");
         } else {
@@ -175,9 +175,9 @@ public class Main {
             List<KeyboardRow> keyboard = new ArrayList<>();
 
             KeyboardRow row1 = new KeyboardRow();
-            row1.add(new KeyboardButton("d4, Д4"));
-            row1.add(new KeyboardButton("d6, Д6"));
-            row1.add(new KeyboardButton("d8, Д8"));
+            row1.add(new KeyboardButton("d4,"));
+            row1.add(new KeyboardButton("d6,"));
+            row1.add(new KeyboardButton("d8,"));
 
             KeyboardRow row2 = new KeyboardRow();
             row2.add(new KeyboardButton("d10"));

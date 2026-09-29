@@ -149,6 +149,22 @@ public class Main {
             }
         }
 
+                    if (parts.length > 1) {
+                try {
+                    int target = Integer.parseInt(parts[1]);
+                    if (roll >= target) {
+                        sendMessage(chatId, "🎲 Выпало: " + roll + " \nПоздравляю путник, ты прошел проверку:)");
+                    } else {
+                        sendMessage(chatId, "🎲 Выпало: " + roll + " \nК сожалению путник, но ты провалил проверку:(");
+                    }
+                } catch (NumberFormatException e) {
+                    sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
+                }
+            } else {
+                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
+            }
+        }
+
         // Вспомогательный метод броска
         private void rollDice(long chatId, int faces) {
             int result = random.nextInt(faces) + 1;

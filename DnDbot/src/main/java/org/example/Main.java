@@ -148,7 +148,7 @@ public class Main {
         if (roll == faces) {
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Поздравляю у тебя критический успех. А ты хорош.");
         } else if (roll == 1) {
-            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nК😔 большому сожалению тебе выпал критический провал.\nВ следующий раз повезет больше.");
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n😔 К большому сожалению тебе выпал критический провал.\nВ следующий раз повезет больше.");
         } else {
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
         }

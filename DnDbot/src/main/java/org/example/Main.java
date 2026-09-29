@@ -19,7 +19,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        // 1. Запуск микро-HTTP сервера для удовлетворения проверок Render
+        // 1. Запуск микро-HTTP сервера для проверок Render
         try {
             String portStr = System.getenv("PORT");
             int port = (portStr != null) ? Integer.parseInt(portStr) : 10000;
@@ -55,13 +55,13 @@ public class Main {
 
         @Override
         public String getBotUsername() {
-            // Укажи здесь юзернейм своего бота без символа @
-            return "D&D bot";
+            // Юзернейм бота без символа @ (например, DnnD20_bot)
+            return "DnnD20_bot"; 
         }
 
         @Override
         public String getBotToken() {
-            // Укажи здесь токен бота от BotFather
+            // Твой токен от BotFather
             return "8804849662:AAFzM9065_seVlUTCJC5__PdWF5Yi5iGxNI";
         }
 
@@ -69,225 +69,93 @@ public class Main {
         public void onUpdateReceived(Update update) {
             if (update.hasMessage() && update.getMessage().hasText()) {
                 String originalText = update.getMessage().getText().trim();
-                String messageText = originalText.toLowerCase();
                 long chatId = update.getMessage().getChatId();
-                
 
-                // Команда /start с отправкой меню
+                // 1. Очищаем текст от юзернейма бота (для поддержки групп)
+                String cleanText = originalText.replaceAll("@" + getBotUsername(), "");
+                String messageText = cleanText.toLowerCase();
+
+                // 2. Команда /start с инструкцией
                 if (messageText.equals("/start")) {
                     sendMenu(chatId, "Приветствую путник ⚔️.\nЗдесь ты сможешь испытать свою удачу! Нажми на кнопку кубика или напиши команду с проверкой сложности, например: /d20 15");
-                    sendMenu(chatId, "Так же сейчас я проведу небольшой инструктаж, специально для тебя, \nТы можешь использовать команды для всех кубиков которые есть в мире D&D, а именно: \nd4, d6, d8, d10, d12, d20 а также d100. \nЯ надеюсь что ты понимаешь эту информацию:) \nС уважением администрация D&D Bot!");
+                    sendMessage(chatId, "Так же сейчас я проведу небольшой инструктаж специально для тебя:\nТы можешь использовать команды для всех кубиков D&D:\nd4, d6, d8, d10, d12, d20, а также d100.\nС уважением, администрация D&D Bot!");
                     return;
                 }
-                String[] parts = originalText.split("\\s+");
-String command = parts[0].toLowerCase();
-if (command.startsWith("/")) {
-    command = command.substring(1); // Убираем слэш
-}
 
-                @Override
-public void onUpdateReceived(Update update) {
-    if (update.hasMessage() && update.getMessage().hasText()) {
-        String originalText = update.getMessage().getText().trim();
-        long chatId = update.getMessage().getChatId();
+                // 3. Обработка всех бросков через единый массив частей
+                String[] parts = cleanText.split("\\s+");
 
-        // 1. Убираем юзернейм бота из команды (например, "/d20@DnnD20_bot" превращаем в "/d20")
-        String cleanText = originalText.replaceAll("@" + getBotUsername(), "");
-        String messageText = cleanText.toLowerCase();
-
-        // 2. Теперь проверяем очищенный текст:
-        if (messageText.startsWith("/d20") || messageText.startsWith("d20")) {
-    String[] parts = originalText.split("\\s+");
-    int roll = random.nextInt(20) + 1;
-
-    if (parts.length > 1) {
-        try {
-            int target = Integer.parseInt(parts[1]);
-if (roll >= target) {
-    sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-} else {
-    sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-}
-        } catch (NumberFormatException e) {
-            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-        }
-    } else {
-        sendMessage(chatId, "🎲 Бросок d20: " + roll);
-    }
-    return;
-}
-
-        // Дальше твой стандартный switch/case...
-    }
-}
-                               
-                
+                // d4
                 if (messageText.startsWith("/d4") || messageText.startsWith("d4")) {
-                    String[] parts4 = originalText.split("\\s+");
-                    int roll = random.nextInt(4) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d4: " + roll);
-                    }
+                    handleRoll(chatId, 4, parts);
                     return;
                 }
 
+                // d6
                 if (messageText.startsWith("/d6") || messageText.startsWith("d6")) {
-                    String[] parts6 = originalText.split("\\s+");
-                    int roll = random.nextInt(6) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d6: " + roll);
-                    }
+                    handleRoll(chatId, 6, parts);
                     return;
                 }
 
+                // d8
                 if (messageText.startsWith("/d8") || messageText.startsWith("d8")) {
-                    String[] parts8 = originalText.split("\\s+");
-                    int roll = random.nextInt(8) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d8: " + roll);
-                    }
+                    handleRoll(chatId, 8, parts);
                     return;
                 }
-                
-                
+
+                // d100 (ПРОВЕРЯЕМ РАНЬШЕ d10, чтобы не перехватывался префикс!)
                 if (messageText.startsWith("/d100") || messageText.startsWith("d100")) {
-                    String[] parts100 = originalText.split("\\s+");
-                    int roll = random.nextInt(100) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d100: " + roll);
-                    }
+                    handleRoll(chatId, 100, parts);
                     return;
                 }
 
-                
+                // d10
                 if (messageText.startsWith("/d10") || messageText.startsWith("d10")) {
-                    String[] parts10 = originalText.split("\\s+");
-                    int roll = random.nextInt(10) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d10: " + roll);
-                    }
+                    handleRoll(chatId, 10, parts);
                     return;
                 }
 
+                // d12
                 if (messageText.startsWith("/d12") || messageText.startsWith("d12")) {
-                    String[] parts12 = originalText.split("\\s+");
-                    int roll = random.nextInt(12) + 1;
-
-                    if (parts.length > 1) {
-                        try {
-                            int target = Integer.parseInt(parts[1]);
-                            if (roll >= target) {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
-                            } else {
-                                sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка  " + target + ")\nК сожалению путник, но ты провалил проверку:(");
-                            }
-                        } catch (NumberFormatException e) {
-                            sendMessage(chatId, "Укажите число сложности корректно, например: /d20 15");
-                        }
-                    } else {
-                        sendMessage(chatId, "🎲 Бросок d12: " + roll);
-                    }
+                    handleRoll(chatId, 12, parts);
                     return;
                 }
 
-                // Нормализация прочих команд (/d4 -> d4)
-                if (messageText.startsWith("/")) {
-                    messageText = messageText.substring(1);
-                }
-
-                // Обработка остальных кубиков
-                switch (messageText) {
-                    case "d4":
-                        rollDice(chatId, 4);
-                        break;
-                    case "d6":
-                        rollDice(chatId, 6);
-                        break;
-                    case "d8":
-                        rollDice(chatId, 8);
-                        break;
-                    case "d10":
-                        rollDice(chatId, 10);
-                        break;
-                    case "d12":
-                        rollDice(chatId, 12);
-                        break;
-                    case "d100":
-                        rollDice(chatId, 100);
-                        break;
-                    default:
-                        break;
+                // d20
+                if (messageText.startsWith("/d20") || messageText.startsWith("d20")) {
+                    handleRoll(chatId, 20, parts);
+                    return;
                 }
             }
         }
 
-        // Метод броска кубика
+        // Универсальный метод для броска любого кубика (с поддержкой проверки сложности)
+        private void handleRoll(long chatId, int faces, String[] parts) {
+            int roll = random.nextInt(faces) + 1;
+
+            if (parts.length > 1) {
+                try {
+                    int target = Integer.parseInt(parts[1]);
+                    if (roll >= target) {
+                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
+                    } else {
+                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                    }
+                } catch (NumberFormatException e) {
+                    sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
+                }
+            } else {
+                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
+            }
+        }
+
+        // Вспомогательный метод броска
         private void rollDice(long chatId, int faces) {
             int result = random.nextInt(faces) + 1;
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + result);
         }
 
-        // Отправка сообщений с интерактивным меню
+        // Отправка клавиатуры
         private void sendMenu(long chatId, String text) {
             SendMessage message = new SendMessage();
             message.setChatId(String.valueOf(chatId));

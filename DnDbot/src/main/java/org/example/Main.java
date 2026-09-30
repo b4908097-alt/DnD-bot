@@ -143,12 +143,21 @@ public class Main {
         } catch (NumberFormatException e) {
             sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
         }
-         else (roll == 1) {
-    long randomNumber = Math.abs(random.nextLong());
-    
-    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-            "\nПоследствие критического провала: " + randomNumber);
-        
+    } else {
+        // Обычный бросок кубика без проверки сложности
+        if (roll == faces) {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Критический успех! Максимальное значение!");
+        } else if (roll == 1) {
+            long randomNumber = Math.abs(random.nextLong());
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                    "\n💀 Критический провал! Выпала 1..." +
+                    "\nПоследствие критического провала: " + randomNumber);
+        } else {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
+        }
+    }
+}
+
     else {
         // Обычный бросок кубика
         if (roll == faces) {

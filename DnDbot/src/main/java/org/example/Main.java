@@ -131,7 +131,8 @@ public class Main {
                     if (roll >= target) {
                         sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nПоздравляю путник, ты прошел проверку:)");
                     } else {
-                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, но ты провалил проверку:(");
+                        sendMessage(chatId, "🎲 Выпало: " + roll + " (Проверка " + target + ")\nК сожалению путник, ты провалил проверку. \nПовезет в следующий раз:)");
+                                    алил проверку:(");
                     }
                 } catch (NumberFormatException e) {
                     sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
@@ -143,6 +144,7 @@ public class Main {
                 } else if (roll == 1) {
                     int randomNumber = random.nextInt (100001);
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                            "\nК сожалению путник, ты провалил проверку. \nВ следующий раз обязательно повезет:)" +
                             "\nПоследствие критического провала: " + randomNumber);
                 } else {
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);

@@ -139,7 +139,7 @@ public class Main {
             } else {
                 // Обычный бросок кубика
                 if (roll == faces) {
-                    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Критический успех! Максимальное значение!");
+                    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nПоздравляю путник, ты прошел проверку:) \nА ты удачливый))");
                 } else if (roll == 1) {
                     int randomNumber = random.nextInt(100001);
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 

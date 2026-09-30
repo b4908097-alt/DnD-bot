@@ -152,6 +152,13 @@ public class Main {
         } else {
             sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
         }
+        } else if (roll == 1) {
+    long randomNumber = Math.abs(random.nextLong());
+    
+    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+            "\nПоследствие критического провала: " + randomNumber);
+}
+
     }
 }
 

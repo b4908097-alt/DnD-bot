@@ -143,7 +143,6 @@ public class Main {
                 } else if (roll == 1) {
                     long randomNumber = Math.abs(random.nextLong());
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                            "\n💀 Критический провал! Выпала 1..." +
                             "\nПоследствие критического провала: " + randomNumber);
                 } else {
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);

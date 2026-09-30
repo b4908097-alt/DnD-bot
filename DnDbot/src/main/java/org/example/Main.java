@@ -142,7 +142,6 @@ public class Main {
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Критический успех! Максимальное значение!");
                 } else if (roll == 1) {
                     int randomNumber = random.nextInt (100001);
-                    long randomNumber = Math.abs(random.nextLong());
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
                             "\nПоследствие критического провала: " + randomNumber);
                 } else {

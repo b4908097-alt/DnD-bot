@@ -141,7 +141,7 @@ public class Main {
                 if (roll == faces) {
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nПоздравляю путник, ты прошел проверку:) \nА ты удачливый))");
                 } else if (roll == 1) {
-                    int randomNumber = random.nextInt(100001);
+                    int randomNumber = random.nextInt(10001);
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
                             "\nК сожалению путник, тебе выпал критический провал. \nВ следующий раз повезет больше:)" + 
                             "\nПоследствие критического провала: " + randomNumber);

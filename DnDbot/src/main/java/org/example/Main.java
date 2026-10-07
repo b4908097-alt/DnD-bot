@@ -69,7 +69,7 @@ public class Main {
                 String originalText = update.getMessage().getText().trim();
                 long chatId = update.getMessage().getChatId();
 
-                // Очищаем текст от юзернейма бота
+                // Очищаем текст от юзернейма бота (для поддержки групп)
                 String cleanText = originalText.replaceAll("@" + getBotUsername(), "");
                 String messageText = cleanText.toLowerCase();
 
@@ -136,40 +136,23 @@ public class Main {
                 } catch (NumberFormatException e) {
                     sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
                 }
-                int randomNumber = random.nextInt(100001); // Генерирует число от 0 до 100 000
-
-} else if (roll == 1) {
-    int randomNumber = random.nextInt(100001); // Число от 0 до 100 000
-
-            } else if (roll == 1) {
-            int randomNumber = random.nextInt(100001); // Случайное число от 0 до 100 000
-
-            if (randomNumber < 80) {
-                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                        "\nК сожалению путник, тебе выпал критический провал." + 
-                        "\nВ следующий раз повезет больше:" + 
-                        "\nПоследствие критического провала: " + randomNumber);
-            } else {
-                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                        "\n💀 Критический провал! Выпала 1..." + 
-                        "\nПоследствие критического провала: " + randomNumber);
-            }
-        } else {
-            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
-        }
-
-}
-
-                
             } else {
                 // Обычный бросок кубика
                 if (roll == faces) {
-                    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\nПоздравляю путник, ты прошел проверку:) \nА ты удачливый))");
+                    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + "\n🔥 Критический успех! Максимальное значение!");
                 } else if (roll == 1) {
-                    int randomNumber = random.nextInt(10001);
-                    sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                            "\nК сожалению путник, тебе выпал критический провал. \nВ следующий раз повезет больше:)" + 
-                            "\nПоследствие критического провала: " + randomNumber);
+                    int randomNumber = random.nextInt(100001); // Случайное число от 0 до 100 000
+
+                    if (randomNumber < 80) {
+                        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                                "\nК сожалению путник, тебе выпал критический провал." + 
+                                "\nВ следующий раз повезет больше:" + 
+                                "\nПоследствие критического провала: " + randomNumber);
+                    } else {
+                        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                                "\n💀 Критический провал! Выпала 1..." + 
+                                "\nПоследствие критического провала: " + randomNumber);
+                    }
                 } else {
                     sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
                 }

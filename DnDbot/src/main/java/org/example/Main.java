@@ -141,20 +141,23 @@ public class Main {
 } else if (roll == 1) {
     int randomNumber = random.nextInt(100001); // Число от 0 до 100 000
 
-    if (randomNumber < 80) {
-        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                "\nК сожалению путник, тебе выпал критический провал." +
-                "\nВ следующий раз повезет больше:" +
-                "\nПоследствие критического провала: " + randomNumber);
-    } else {
-        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-                "\nК сожалению путник, тебе выпал критический провал." +
-                "\nПоследствие критического провала: " + randomNumber);
-    }
-                if (randomNumber >= 80) {
-                    sendMasseg(chatId, "🎲 Бросок d" + face + ": " + roll +
-                               "\nПоздравляю путник, ты прошел проверку:)");
-                }
+            } else if (roll == 1) {
+            int randomNumber = random.nextInt(100001); // Случайное число от 0 до 100 000
+
+            if (randomNumber < 80) {
+                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                        "\nК сожалению путник, тебе выпал критический провал." + 
+                        "\nВ следующий раз повезет больше:" + 
+                        "\nПоследствие критического провала: " + randomNumber);
+            } else {
+                sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                        "\n💀 Критический провал! Выпала 1..." + 
+                        "\nПоследствие критического провала: " + randomNumber);
+            }
+        } else {
+            sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll);
+        }
+
 }
 
                 

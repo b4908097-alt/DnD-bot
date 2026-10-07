@@ -136,6 +136,12 @@ public class Main {
                 } catch (NumberFormatException e) {
                     sendMessage(chatId, "Укажите число сложности корректно, например: /d" + faces + " 15");
                 }
+                int randomNumber = random.nextInt(100001); // Генерирует число от 0 до 100 000
+
+sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+        "\nК сожалению путник, тебе выпал критический провал. \nВ следующий раз повезет больше:" + 
+        "\nПоследствие критического провала: " + randomNumber);
+
             } else {
                 // Обычный бросок кубика
                 if (roll == faces) {

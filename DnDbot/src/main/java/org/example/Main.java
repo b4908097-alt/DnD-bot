@@ -138,10 +138,26 @@ public class Main {
                 }
                 int randomNumber = random.nextInt(100001); // Генерирует число от 0 до 100 000
 
-sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
-        "\nК сожалению путник, тебе выпал критический провал. \nВ следующий раз повезет больше:" + 
-        "\nПоследствие критического провала: " + randomNumber);
+} else if (roll == 1) {
+    int randomNumber = random.nextInt(100001); // Число от 0 до 100 000
 
+    if (randomNumber < 80) {
+        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                "\nК сожалению путник, тебе выпал критический провал." +
+                "\nВ следующий раз повезет больше:" +
+                "\nПоследствие критического провала: " + randomNumber);
+    } else {
+        sendMessage(chatId, "🎲 Бросок d" + faces + ": " + roll + 
+                "\nК сожалению путник, тебе выпал критический провал." +
+                "\nПоследствие критического провала: " + randomNumber);
+    }
+                if (randomNumber >= 80) {
+                    sendMasseg(chatId, "🎲 Бросок d" + face + ": " + roll +
+                               "\nПоздравляю путник, ты прошел проверку:)");
+                }
+}
+
+                
             } else {
                 // Обычный бросок кубика
                 if (roll == faces) {
